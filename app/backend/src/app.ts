@@ -27,7 +27,7 @@ class App {
     this.app.use(express.json());
     this.app.use(accessControl);
     this.app.use('/login', router);
-    this.app.use('/team', teamRouter);
+    this.app.use('/teams', teamRouter);
     this.app.use(httpErrorMiddleware);
   }
 
