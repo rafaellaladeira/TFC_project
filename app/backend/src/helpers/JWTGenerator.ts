@@ -1,12 +1,11 @@
-import { sign, SignOptions } from 'jsonwebtoken';
+import { sign } from 'jsonwebtoken';
 import IEmail from '../interfaces/email.interface';
+import 'dotenv/config';
 
-const SECRET = 'batatatatata';
-const jwtDefaultConfig: SignOptions = {
-//   expiresIn: '30d',
-  algorithm: 'HS256',
-};
+type Secret = string;
 
-const generateJWTToken = (payload: IEmail) => sign(payload, SECRET, jwtDefaultConfig);
+const secret: Secret = process.env.JWT_SECRET || 'jwt_secret';
+
+const generateJWTToken = (payload: IEmail) => sign(payload, secret);
 
 export default generateJWTToken;

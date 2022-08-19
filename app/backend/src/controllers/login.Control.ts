@@ -16,6 +16,7 @@ export default class LoginControl {
         const token = generateJWTToken(req.body.email);
         return res.status(200).json({ token });
       }
+      return res.status(402).json({ message: 'Something is wrong' });
     } catch (err) {
       next(err);
     }
