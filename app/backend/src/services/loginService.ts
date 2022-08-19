@@ -8,7 +8,8 @@ export default class LoginService {
     const { email, password } = body;
     if (!email || !password) throw new Error(400, 'All fields must be filled');
     const result = await User.findOne({ where: { email } });
-    if (!result) throw new Error(401, 'Incorrect email or password');
+    console.log(result);
+    if (result === null) throw new Error(401, 'Incorrect email or password');
     if (!Bcrypt.compareSync(password, result.password as string)) {
       throw new Error(401, 'Incorrect email or password');
     }

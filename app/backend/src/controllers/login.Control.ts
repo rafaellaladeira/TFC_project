@@ -14,7 +14,7 @@ export default class LoginControl {
       const check = await this._loginService.login(req.body);
       if (check) {
         const token = generateJWTToken(req.body.email);
-        res.status(200).json({ token });
+        return res.status(200).json({ token });
       }
     } catch (err) {
       next(err);
