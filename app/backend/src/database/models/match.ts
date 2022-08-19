@@ -26,8 +26,8 @@ match.init({
       model: 'teams',
       key: 'id',
     },
-    // onUpdate: 'CASCADE',
-    // onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
   },
   hometeamgoals: {
     type: INTEGER,
@@ -42,8 +42,8 @@ match.init({
       model: 'teams',
       key: 'id',
     },
-    // onUpdate: 'CASCADE',
-    // onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
   },
   awayteamgoals: {
     type: INTEGER,
@@ -61,8 +61,6 @@ match.init({
   underscored: true,
   timestamps: false,
 });
-
-// match.belongsTo(user, { foreignKey: 'id', as: 'home' });
 
 match.hasMany(team, { foreignKey: 'id', as: 'hometeam' });
 match.hasMany(team, { foreignKey: 'id', as: 'awayteam' });
