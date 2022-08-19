@@ -1,5 +1,10 @@
-// import { NextFunction, Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
+import TeamControl from '../controllers/team.Control';
 
-// const router = Router();
+const teamRouter = Router();
 
-// router.get('/', (req: Request, res: Response, next: NextFunction) => teamControl)
+const teamControl = new TeamControl();
+teamRouter.get('/', (req: Request, res: Response, next: NextFunction) => teamControl
+  .getAll(req, res, next));
+
+export default teamRouter;
