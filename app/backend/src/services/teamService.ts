@@ -5,4 +5,10 @@ export default class Team {
     const result = await TeamDb.findAll();
     return result;
   };
+
+  public getById = async (id: number) => {
+    const result = await TeamDb.findOne({
+      where: { id } });
+    return result;
+  };
 }

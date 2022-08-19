@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      teamname: {
+      teamName: {
         type: Sequelize.STRING,
         allowNull: false,
         field: 'team_name'
