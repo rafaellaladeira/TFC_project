@@ -14,7 +14,7 @@ export default class Team {
     try {
       const result = await this._teamService.getAll();
       if (result) return res.status(200).json(result);
-      return res.status(402).json({ message: 'Something is wrong' });
+      return res.status(404).json({ message: 'Something is wrong' });
     } catch (err) {
       next(err);
     }
@@ -25,7 +25,7 @@ export default class Team {
       const { id } = req.params;
       const result = await this._teamService.getById(id);
       if (result !== null) return res.status(200).json(result);
-      return res.status(402).json({ message: 'Invalid id' });
+      return res.status(404).json({ message: 'Invalid id' });
     } catch (err) {
       next(err);
     }
