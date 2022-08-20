@@ -21,4 +21,14 @@ export default class LoginControl {
       next(err);
     }
   }
+
+  public async validate(req: Request<any>, res: Response, next: NextFunction) {
+    try {
+      const { authorization }: any = req.headers;
+      const data = await this._loginService.getByEmail(authorization);
+      return res.status(200).json(data);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
