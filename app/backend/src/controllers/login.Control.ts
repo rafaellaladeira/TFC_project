@@ -32,3 +32,5 @@ export default class LoginControl {
     }
   }
 }
+
+// timeout na questão 5, não entendi o pq
