@@ -37,9 +37,9 @@ describe('Test /login route', () => {
         password: "batatinha"
       });
 
-      expect(chaiHttpResponse).to.have.status(401);
+      expect(chaiHttpResponse).to.have.status(200);
       expect(chaiHttpResponse).to.be.json;
-      expect(chaiHttpResponse).to.have.property('token');
+      expect(chaiHttpResponse.body).to.have.property('token');
 
     });
     it('if there is no "email" returns an error 400, with an error msg', async () => {
@@ -50,7 +50,7 @@ describe('Test /login route', () => {
       })
       expect(chaiHttpResponse).to.have.status(400)
       expect(chaiHttpResponse).to.be.json
-      expect(chaiHttpResponse).to.deep.equal('All fields must be filled')
+      expect(chaiHttpResponse.body.message).to.be.equal('All fields must be filled')
     });
     it('if there is no "password" returns an error 400, with an error msg', async () => {
       
@@ -60,7 +60,7 @@ describe('Test /login route', () => {
       })
       expect(chaiHttpResponse).to.have.status(400)
       expect(chaiHttpResponse).to.be.json
-      expect(chaiHttpResponse).to.deep.equal('All fields must be filled')
+      expect(chaiHttpResponse.body.message).to.be.equal('All fields must be filled')
     });
     it('if the "email" doesnt exist on db, returns an error 401, with an error msg', async () => {
       chaiHttpResponse = await chai.request(app).post('/login').send({
@@ -69,7 +69,7 @@ describe('Test /login route', () => {
       })
       expect(chaiHttpResponse).to.have.status(401)
       expect(chaiHttpResponse).to.be.json
-      expect(chaiHttpResponse).to.deep.equal('Incorrect email or password')
+      expect(chaiHttpResponse.body.message).to.be.equal('Incorrect email or password')
     });
     it('if the "password" is incorrect, returns an erro 401, with an error msg', async () => {
       chaiHttpResponse = await chai.request(app).post('/login').send({
@@ -78,7 +78,7 @@ describe('Test /login route', () => {
       })
       expect(chaiHttpResponse).to.have.status(401)
       expect(chaiHttpResponse).to.be.json
-      expect(chaiHttpResponse).to.be('Incorrect email or password')
+      expect(chaiHttpResponse.body.message).to.be.equal('Incorrect email or password')
     });
   })
 
@@ -86,7 +86,6 @@ describe('Test /login route', () => {
 
     const userDb = {
       token: "eyJhbGciOiJIUzI1NiJ9.dXNlckB1c2VyLmNvbQ.8yAUgfpLRsTuqgg-Yj3YeO66h8PxSQdx1y641jX4JpM",
-      role: "rafaella.ladeira"
     }
 
     beforeEach(() => {
@@ -106,14 +105,14 @@ describe('Test /login route', () => {
       expect(chaiHttpResponse).to.be.json
       expect(chaiHttpResponse).to.have.property('role')
     });
-    it('if return a status 500, with "Invalid Token" msg', async ()=> {
+    it('if returns a status 500, with an error msg', async ()=> {
       chaiHttpResponse = await chai.request(app).get('/login/validate').send({
         token: ".8yAUgfpLRsTuqgg-Yj3YeO66h8PxSQdx1y641jX4JpM"
       })
 
       expect(chaiHttpResponse).to.have.status(500)
       expect(chaiHttpResponse).to.be.json
-      expect(chaiHttpResponse).to.deep.equal("Invalid Token")
+      expect(chaiHttpResponse.body.message).to.be.equal("jwt must be provided")
     });
   })
 });
