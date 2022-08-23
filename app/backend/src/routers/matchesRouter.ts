@@ -5,7 +5,10 @@ const matchesRouter = Router();
 
 const matches = new Matches();
 
-matchesRouter.get('/', (req: Request, res: Response, next: NextFunction) => matches
-  .getAllMatches(req, res, next));
+matchesRouter.get(
+  '/',
+  (req: Request, res: Response, next: NextFunction) => matches
+    .getAllMatches(req, res, next),
+);
 
 export default matchesRouter;
