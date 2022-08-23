@@ -43,8 +43,7 @@ export default class Matches {
   public createNewMatch = async (body: any) => {
     const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = body;
     if (homeTeam === awayTeam) {
-      throw new Error(401, `It is not possible 
-    to create a match with two equal teams`);
+      throw new Error(401, 'It is not possible to create a match with two equal teams');
     }
     const result = await team.findOne({ where: { id: homeTeam }, logging: console.log });
     const result2 = await team.findOne({ where: { id: awayTeam } });
