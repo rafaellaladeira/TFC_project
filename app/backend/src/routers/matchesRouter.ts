@@ -11,4 +11,7 @@ matchesRouter.get(
     .getAllMatches(req, res, next),
 );
 
+matchesRouter.post('/', (req: Request, res: Response, next: NextFunction) =>
+  matches.createNewMatch(req, res, next));
+
 export default matchesRouter;

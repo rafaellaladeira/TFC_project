@@ -53,7 +53,7 @@ match.init({
   inProgress: {
     type: BOOLEAN,
     field: 'in_progress',
-    allowNull: false,
+    defaultValue: true,
   },
 }, {
   sequelize: db,

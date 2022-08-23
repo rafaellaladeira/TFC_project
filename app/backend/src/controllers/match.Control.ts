@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
+import * as jwt from 'jsonwebtoken';
+import Error from '../helpers/httpError';
 import match from '../database/models/match';
 import MatchesService from '../services/matchService';
+
+const secret = process.env.JWT_SECRET || 'jwt_secret';
 
 export default class Matches {
   private _matchesService: MatchesService;
@@ -20,6 +24,18 @@ export default class Matches {
       if (state === 'true') value = 1;
       const result: match[] = await this._matchesService.getBySearch(value);
       return res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async createNewMatch(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { authorization }: any = req.headers;
+      const email = jwt.verify(authorization, secret);
+      if (!email) throw new Error(401, 'Token must be a valid token');
+      const result = await this._matchesService.createNewMatch(req.body);
+      return res.status(201).json(result);
     } catch (err) {
       next(err);
     }
