@@ -18,7 +18,7 @@ match.init({
     primaryKey: true,
     type: INTEGER,
   },
-  hometeam: {
+  homeTeam: {
     type: INTEGER,
     field: 'home_team',
     allowNull: false,
@@ -29,12 +29,12 @@ match.init({
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   },
-  hometeamgoals: {
+  homeTeamGoals: {
     type: INTEGER,
     field: 'home_team_goals',
     allowNull: false,
   },
-  awayteam: {
+  awayTeam: {
     type: INTEGER,
     field: 'away_team',
     allowNull: false,
@@ -50,7 +50,7 @@ match.init({
     field: 'away_team_goals',
     allowNull: false,
   },
-  inprogress: {
+  inProgress: {
     type: BOOLEAN,
     field: 'in_progress',
     allowNull: false,
@@ -62,7 +62,10 @@ match.init({
   timestamps: false,
 });
 
-match.hasMany(team, { foreignKey: 'id', as: 'hometeam' });
-match.hasMany(team, { foreignKey: 'id', as: 'awayteam' });
+team.hasMany(match, { foreignKey: 'homeTeam', as: 'teamHome' });
+team.hasMany(match, { foreignKey: 'awayTeam', as: 'teamAway' });
+
+match.belongsTo(team, { foreignKey: 'homeTeam', as: 'teamHome' });
+match.belongsTo(team, { foreignKey: 'awayTeam', as: 'teamAway' });
 
 export default match;

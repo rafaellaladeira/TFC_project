@@ -2,6 +2,7 @@ import * as express from 'express';
 import httpErrorMiddleware from './middlewares/error.middleware';
 import router from './routers/loginRouter';
 import teamRouter from './routers/teamRouter';
+import matchesRouter from './routers/matchesRouter';
 import 'express-async-errors';
 
 class App {
@@ -28,6 +29,7 @@ class App {
     this.app.use(accessControl);
     this.app.use('/login', router);
     this.app.use('/teams', teamRouter);
+    this.app.use('/matches', matchesRouter);
     this.app.use(httpErrorMiddleware);
   }
 
