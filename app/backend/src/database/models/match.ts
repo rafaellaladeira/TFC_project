@@ -45,7 +45,7 @@ match.init({
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   },
-  awayteamgoals: {
+  awayTeamGoals: {
     type: INTEGER,
     field: 'away_team_goals',
     allowNull: false,
