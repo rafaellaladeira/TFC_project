@@ -33,9 +33,10 @@ export default class Matches {
     try {
       const { authorization }: any = req.headers;
       const email = jwt.verify(authorization, secret);
-      if (!email) throw new Error(401, 'Token must be a valid token');
-      const result = await this._matchesService.createNewMatch(req.body);
-      return res.status(201).json(result);
+      if (email) {
+        const result = await this._matchesService.createNewMatch(req.body);
+        return res.status(201).json(result);
+      }
     } catch (err) {
       next(err);
     }

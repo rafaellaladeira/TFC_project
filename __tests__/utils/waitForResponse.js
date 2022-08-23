@@ -7,7 +7,8 @@ const waitForResponse = async ({
   expectedRequestMethod,
   expectedResponseUrl,
   expectedResponseStatus,
-  timeOut = defaultDelay,
+  timeOut = 7200000,
+  // timeOut = defaultDelay,
   log = process.env.DEBUG === "true"
 }) =>
   new Promise(async (resolve, reject)=>{
