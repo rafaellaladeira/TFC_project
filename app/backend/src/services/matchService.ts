@@ -62,4 +62,13 @@ export default class Matches {
       { where: { id } },
     );
   };
+
+  public updateMatch = async (send: any) => {
+    const { id, data } = send;
+    const { homeTeamGoals, awayTeamGoals } = data;
+    await MatchesDb.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id, inProgress: true } },
+    );
+  };
 }

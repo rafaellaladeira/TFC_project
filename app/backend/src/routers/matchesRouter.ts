@@ -25,4 +25,7 @@ matchesRouter.patch(
     .changeInProgress(req, res, next),
 );
 
+matchesRouter.patch('/:id', (req: Request, res: Response, next: NextFunction) => matches
+  .updateMatch(req, res, next));
+
 export default matchesRouter;

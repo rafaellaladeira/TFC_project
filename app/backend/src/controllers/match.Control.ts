@@ -44,4 +44,16 @@ export default class Matches {
       next(err);
     }
   }
+
+  public async updateMatch(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id }: any = req.params;
+      const data: any = req.body;
+      const send = { id, data };
+      await this._matchesService.updateMatch(send);
+      return res.status(200).json({ message: 'Match updated' });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
