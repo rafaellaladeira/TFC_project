@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import Matches from '../controllers/match.Control';
+import authenticationMiddleware from '../middlewares/tokenValidation';
 
 const matchesRouter = Router();
 
@@ -11,7 +12,11 @@ matchesRouter.get(
     .getAllMatches(req, res, next),
 );
 
-matchesRouter.post('/', (req: Request, res: Response, next: NextFunction) =>
-  matches.createNewMatch(req, res, next));
+matchesRouter.post(
+  '/',
+  authenticationMiddleware,
+  (req: Request, res: Response, next: NextFunction) =>
+    matches.createNewMatch(req, res, next),
+);
 
 export default matchesRouter;

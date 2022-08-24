@@ -22,7 +22,6 @@ export default class Matches {
   };
 
   public getBySearch = async (state: any): Promise<MatchesDb[]> => {
-    console.log(state);
     const result = await MatchesDb.findAll({
       where: { inProgress: state },
       include: [{
@@ -49,7 +48,11 @@ export default class Matches {
     const result2 = await team.findOne({ where: { id: awayTeam } });
     if (result === null || result2 === null) throw new Error(404, 'There is no team with such id!');
 
-    const data = await MatchesDb.create({ homeTeam, awayTeam, homeTeamGoals, awayTeamGoals });
+    const data = await MatchesDb.create({ homeTeam,
+      awayTeam,
+      homeTeamGoals,
+      awayTeamGoals,
+      inProgress: true });
     return data;
   };
 }

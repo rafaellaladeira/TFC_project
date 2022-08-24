@@ -1,10 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import * as jwt from 'jsonwebtoken';
-import Error from '../helpers/httpError';
 import match from '../database/models/match';
 import MatchesService from '../services/matchService';
-
-const secret = process.env.JWT_SECRET || 'jwt_secret';
 
 export default class Matches {
   private _matchesService: MatchesService;
@@ -31,12 +27,8 @@ export default class Matches {
 
   public async createNewMatch(req: Request, res: Response, next: NextFunction) {
     try {
-      const { authorization }: any = req.headers;
-      const email = jwt.verify(authorization, secret);
-      if (email) {
-        const result = await this._matchesService.createNewMatch(req.body);
-        return res.status(201).json(result);
-      }
+      const result = await this._matchesService.createNewMatch(req.body);
+      return res.status(201).json(result);
     } catch (err) {
       next(err);
     }
