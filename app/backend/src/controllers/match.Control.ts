@@ -33,4 +33,15 @@ export default class Matches {
       next(err);
     }
   }
+
+  public async changeInProgress(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id }: any = req.params;
+      console.log(id);
+      await this._matchesService.changeInProgress(id);
+      return res.status(200).json({ message: 'Finished' });
+    } catch (err) {
+      next(err);
+    }
+  }
 }

@@ -55,4 +55,11 @@ export default class Matches {
       inProgress: true });
     return data;
   };
+
+  public changeInProgress = async (id: number) => {
+    await MatchesDb.update(
+      { inProgress: false },
+      { where: { id } },
+    );
+  };
 }

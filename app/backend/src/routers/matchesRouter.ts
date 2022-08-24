@@ -19,4 +19,7 @@ matchesRouter.post(
     matches.createNewMatch(req, res, next),
 );
 
+matchesRouter.patch('/:id/finish', (req: Request, res: Response, next: NextFunction) => matches
+  .changeInProgress(req, res, next));
+
 export default matchesRouter;
