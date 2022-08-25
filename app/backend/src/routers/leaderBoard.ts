@@ -9,4 +9,9 @@ leaderBoardRouter.get(
   (req: Request, res: Response, next: NextFunction) => leader.filterHome(req, res, next),
 );
 
+leaderBoardRouter.get(
+  '/away',
+  (req: Request, res: Response, next: NextFunction) => leader.filterAway(req, res, next),
+);
+
 export default leaderBoardRouter;

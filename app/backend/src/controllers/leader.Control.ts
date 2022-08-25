@@ -16,4 +16,13 @@ export default class Leader {
       next(err);
     }
   }
+
+  public async filterAway(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result: any = await this._leaderService.filterAway();
+      return res.status(200).json(result[0]);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
