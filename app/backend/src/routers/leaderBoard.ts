@@ -14,4 +14,9 @@ leaderBoardRouter.get(
   (req: Request, res: Response, next: NextFunction) => leader.filterAway(req, res, next),
 );
 
+leaderBoardRouter.get(
+  '/',
+  (req: Request, res: Response, next: NextFunction) => leader.filterAll(req, res, next),
+);
+
 export default leaderBoardRouter;

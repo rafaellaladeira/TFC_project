@@ -8,7 +8,7 @@ export default class Leader {
     this._leaderService = new LeaderService();
   }
 
-  public async filterHome(req: Request, res: Response, next: NextFunction) {
+  public async filterHome(_req: Request, res: Response, next: NextFunction) {
     try {
       const result: any = await this._leaderService.filterHome();
       return res.status(200).json(result[0]);
@@ -17,9 +17,18 @@ export default class Leader {
     }
   }
 
-  public async filterAway(req: Request, res: Response, next: NextFunction) {
+  public async filterAway(_req: Request, res: Response, next: NextFunction) {
     try {
       const result: any = await this._leaderService.filterAway();
+      return res.status(200).json(result[0]);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async filterAll(_req: Request, res: Response, next: NextFunction) {
+    try {
+      const result: any = await this._leaderService.filterAll();
       return res.status(200).json(result[0]);
     } catch (err) {
       next(err);
