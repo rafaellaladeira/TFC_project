@@ -9,7 +9,7 @@
   
   Tem-se relacionamento entre as tabelas `teams` e `matches`, e foi utilizado a ORM Sequelize para criar as models e migrations.
   
-  O back-end foi implementado de acordo com as regras de negócio, para popular adequadamente a tabela do front-end, que é exibida para a o usuário do sistema.
+  O back-end foi implementado de acordo com as regras de negócio, para popular adequadamente a tabela do front-end, que é exibida para o usuário do sistema.
   
   
 
